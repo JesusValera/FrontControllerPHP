@@ -1,17 +1,18 @@
-<html>
-    <head>
-    <title>List of Posts</title>
-    </head>
-    <body>
+<!-- templates/list.php -->
+
+<?php $title = 'List of Posts' ?>
+ 
+<?php ob_start() ?>
     <h1>List of Posts</h1>
     <ul>
-        <?php foreach($posts as $post): ?>
+        <?php foreach ($posts as $post): ?>
         <li>
-            <a href="/show.php?id=<?php echo $post['id'] ?>">
+            <a href="/read?id=<?php echo $post['id'] ?>">
                 <?php echo $post['title'] ?>
                 </a>
         </li>
         <?php endforeach; ?>
     </ul>
-    </body>
-</html>
+<?php $content = ob_get_clean() ?>
+ 
+<?php include 'base.php' ?>

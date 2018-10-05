@@ -1,4 +1,5 @@
 <?php
+// model.php
 
 function open_database()
 {
