@@ -1,15 +1,21 @@
 <?php
 // index.php
 
-require_once 'model.php';
-require_once 'controller.php';
+require_once 'vendor/autoload.php';
 
-$uri = $_SERVER['REQUEST_URI'];
-if (preg_match('/index\.php$/', $uri)) {
-    list_action();
-} elseif (preg_match('/index\.php\/show/', $uri) && isset($_GET['id'])) {
-    show_action($_GET['id']);
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
+$request = Request::createFromGlobals();
+
+$uri = $request->getPathInfo();
+if ($uri == '/') {
+    $response = list_action();
+} elseif ($uri == '/show' && $request->query->has('id')) {
+    $response = show_action($request->query->get('id'));
 } else {
-    header('Status: 404 Not Found');
-    echo '<html><body><h1>Page not found</h1></body></html>';
+    $html = '<html><body><h1>Page Not Found</h1></body></html>';
+    $response = new Response($html, Response::HTTP_NOT_FOUND);
 }
+
+$response->send();
