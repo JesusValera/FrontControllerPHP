@@ -1,11 +1,11 @@
 <!-- templates/base.php -->
 
 <html>
-    <head>
+<head>
     <title><?php echo $title ?></title>
-    </head>
-    <body>
-    <?php echo $content ?>
-    </body>
+</head>
+<body>
+<?php echo $content ?>
+</body>
 </html>
 
